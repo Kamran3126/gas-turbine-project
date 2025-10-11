@@ -1,0 +1,9 @@
+# تمام محتوای پوشه data را نادیده بگیر
+/data/*
+# اما فایل های .dvc و .gitignore داخل آن را نادیده نگیر
+!/data/*.dvc
+!/data/.gitignore
+
+/notebooks/
+__pycache__/
+.venv/

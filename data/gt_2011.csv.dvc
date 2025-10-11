@@ -1,0 +1,5 @@
+outs:
+- md5: c355a1eabb2a076bbd7c371ff990bf03
+  size: 115503
+  hash: md5
+  path: gt_2011.csv
