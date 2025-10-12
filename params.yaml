@@ -12,5 +12,5 @@ split_data:
   test_size: 0.2
 
 train_model:
-  n_estimators: 50
+  n_estimators: 200
   objective: reg:squarederror

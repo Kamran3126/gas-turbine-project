@@ -15,10 +15,10 @@ stages:
       params.yaml:
         base.random_state: 42
         split_data.test_size: 0.2
-        train_model.n_estimators: 50
+        train_model.n_estimators: 200
         train_model.objective: reg:squarederror
     outs:
     - path: metrics.json
       hash: md5
-      md5: a9acdf53ebf4f5452f12e8235f746b02
-      size: 72
+      md5: 954e4131bdbe3d6f035753d3b1273de3
+      size: 73
