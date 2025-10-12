@@ -1,0 +1,11 @@
+stages:
+  train:
+    cmd: python src/train.py
+    deps:
+    - data/gt_2011.csv
+    - src/train.py
+    params:
+    - params.yaml
+    metrics:
+    - metrics.json:
+        cache: false

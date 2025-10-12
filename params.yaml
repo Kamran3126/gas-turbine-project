@@ -1,0 +1,16 @@
+base:
+  project: gas-turbine-project
+  random_state: 42
+
+data_source:
+  s3_source: data/gt_2011.csv # In a real project, this would be an S3 path
+
+load_data:
+  target_col: TEY
+
+split_data:
+  test_size: 0.2
+
+train_model:
+  n_estimators: 50
+  objective: reg:squarederror
