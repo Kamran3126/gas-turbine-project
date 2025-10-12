@@ -12,3 +12,5 @@ stages:
     metrics:
     - metrics.json:
         cache: false
+    outs: # <-- بخش جدید برای خروجی‌های اصلی
+    - models/model.joblib

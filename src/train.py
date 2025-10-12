@@ -7,7 +7,9 @@ from sklearn.metrics import mean_squared_error, r2_score
 import warnings
 import yaml
 import argparse
-import json # <-- کتابخانه جدید برای کار با فایل جیسون
+import json
+import joblib # <-- کتابخانه جدید برای ذخیره مدل
+import os     # <-- کتابخانه جدید برای کار با پوشه‌ها
 
 warnings.filterwarnings('ignore')
 
@@ -25,6 +27,7 @@ if __name__ == "__main__":
 
     config = read_params(args.config)
 
+    # ... (تمام بخش خواندن پارامترها و آموزش مدل مثل قبل است) ...
     data_path = config["data_source"]["s3_source"]
     target_col = config["load_data"]["target_col"]
     test_size = config["split_data"]["test_size"]
@@ -33,10 +36,8 @@ if __name__ == "__main__":
     objective = config["train_model"]["objective"]
 
     df = pd.read_csv(data_path)
-
     y = df[target_col]
     X = df.drop(target_col, axis=1)
-
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state)
 
     print("--> Training XGBoost model...")
@@ -45,7 +46,6 @@ if __name__ == "__main__":
     print("--> Model training complete!")
 
     y_pred = xgb_model.predict(X_test)
-
     rmse = np.sqrt(mean_squared_error(y_test, y_pred))
     r2 = r2_score(y_test, y_pred)
 
@@ -53,15 +53,17 @@ if __name__ == "__main__":
     print(f"   RMSE: {rmse:.4f} MW")
     print(f"   R² Score: {r2:.4f}")
     print("------------------------------")
-
-    # ----- بخش جدید: ذخیره متریک‌ها در فایل جیسون -----
-    metrics = {
-        "rmse": rmse,
-        "r2_score": r2
-    }
     
+    metrics = {"rmse": rmse, "r2_score": r2}
     with open("metrics.json", "w") as f:
         json.dump(metrics, f, indent=4)
-    
     print("--> Metrics saved to metrics.json")
-    # ---------------------------------------------------
+
+    # ----- بخش جدید: ذخیره مدل آموزش‌دیده -----
+    model_dir = "models"
+    os.makedirs(model_dir, exist_ok=True) # ساخت پوشه models اگر وجود نداشته باشد
+    model_path = os.path.join(model_dir, "model.joblib")
+    
+    joblib.dump(xgb_model, model_path)
+    print(f"--> Model saved to {model_path}")
+    # ---------------------------------------------
