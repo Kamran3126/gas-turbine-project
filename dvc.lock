@@ -1,0 +1,24 @@
+schema: '2.0'
+stages:
+  train:
+    cmd: python src/train.py
+    deps:
+    - path: data/gt_2011.csv
+      hash: md5
+      md5: c355a1eabb2a076bbd7c371ff990bf03
+      size: 115503
+    - path: src/train.py
+      hash: md5
+      md5: abbb6f66f4c4c81a74cc01bc052d2ca2
+      size: 2270
+    params:
+      params.yaml:
+        base.random_state: 42
+        split_data.test_size: 0.2
+        train_model.n_estimators: 50
+        train_model.objective: reg:squarederror
+    outs:
+    - path: metrics.json
+      hash: md5
+      md5: a9acdf53ebf4f5452f12e8235f746b02
+      size: 72

@@ -5,7 +5,10 @@ stages:
     - data/gt_2011.csv
     - src/train.py
     params:
-    - params.yaml
+    - base.random_state
+    - split_data.test_size
+    - train_model.n_estimators
+    - train_model.objective
     metrics:
     - metrics.json:
         cache: false
