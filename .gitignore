@@ -2,8 +2,7 @@
 /data/*
 # اما فایل های .dvc و .gitignore داخل آن را نادیده نگیر
 !/data/*.dvc
-!/data/.gitignore
+!/data/.gitignore 
 
-/notebooks/
 __pycache__/
 .venv/
