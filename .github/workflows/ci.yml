@@ -1,0 +1,39 @@
+name: DVC Repro CI
+
+on: [push]
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          # ما به تاریخچه کامل git برای DVC نیاز داریم
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10' # می‌توانید نسخه پایتون خود را اینجا وارد کنید
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+      
+      - name: Configure DVC with MinIO
+        env:
+          # این مقادیر را از Secrets گیت‌هاب می‌خوانیم
+          MINIO_ACCESS_KEY: ${{ secrets.MINIO_ACCESS_KEY }}
+          MINIO_SECRET_KEY: ${{ secrets.MINIO_SECRET_KEY }}
+        run: |
+          dvc remote modify myremote endpointurl http://127.0.0.1:9000
+          dvc remote modify myremote access_key_id $MINIO_ACCESS_KEY
+          dvc remote modify myremote secret_access_key $MINIO_SECRET_KEY
+
+      - name: Pull DVC data
+        run: |
+          dvc pull -v
+
+      - name: Reproduce DVC pipeline
+        run: |
+          dvc repro -v
