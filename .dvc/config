@@ -1,7 +1,12 @@
 [core]
-    remote = minio
+    remote = myremote
 ['remote "minio"']
     url = s3://gas-turbine
     endpointurl = http://localhost:9000
+    access_key_id = minioadmin
+    secret_access_key = minioadmin
+['remote "myremote"']
+    url = s3://gas-turbine
+    endpointurl = http://127.0.0.1:9000
     access_key_id = minioadmin
     secret_access_key = minioadmin
