@@ -1,0 +1,14 @@
+# Main libraries for data science
+pandas
+scikit-learn
+matplotlib
+seaborn
+jupyterlab
+
+# MLOps tools
+dvc[s3]
+mlflow
+
+# Deployment tools (for future use)
+streamlit
+bentoml
