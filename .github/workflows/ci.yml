@@ -1,5 +1,16 @@
 # .github/workflows/ci.yml
 
+# ✅ نامی برای workflow جهت نمایش بهتر در GitHub Actions
+name: CI Pipeline
+
+# ✅ بخش اصلی که برای رفع خطا اضافه شد
+# این بخش مشخص می‌کند که workflow چه زمانی اجرا شود
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
 jobs:
   run:
     runs-on: ubuntu-latest
@@ -19,7 +30,8 @@ jobs:
       
       - name: Configure DVC with MinIO
         env:
-          # این مقادیر را از Secrets گیت‌هاب می‌خوانیم
+          # ✅ این خط برای رفع خطای احتمالی بعدی اضافه شد
+          MINIO_ENDPOINT_URL: ${{ secrets.MINIO_ENDPOINT_URL }}
           MINIO_ACCESS_KEY: ${{ secrets.MINIO_ACCESS_KEY }}
           MINIO_SECRET_KEY: ${{ secrets.MINIO_SECRET_KEY }}
         run: |
