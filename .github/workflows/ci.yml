@@ -1,24 +1,21 @@
-name: DVC Repro CI
-
-on: [push]
+# .github/workflows/ci.yml
 
 jobs:
   run:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          # ما به تاریخچه کامل git برای DVC نیاز داریم
-          fetch-depth: 0
-
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.12' # می‌توانید نسخه پایتون خود را اینجا وارد کنید
+          python-version: '3.12'
 
       - name: Install dependencies
         run: |
+          pip install pip-tools
+          pip-compile requirements.in -o requirements.txt
           pip install -r requirements.txt
+      
       
       - name: Configure DVC with MinIO
         env:
