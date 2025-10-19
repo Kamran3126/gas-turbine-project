@@ -716,12 +716,7 @@ python-multipart==0.0.20
     #   mcp
 pytz==2025.2
     # via pandas
-pywin32==311
-    # via
-    #   docker
-    #   dvc-task
-    #   jupyter-core
-    #   mcp
+
 pywinpty==3.0.2
     # via
     #   jupyter-server
