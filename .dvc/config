@@ -7,6 +7,6 @@
     secret_access_key = minioadmin
 ['remote "myremote"']
     url = s3://gas-turbine
-    endpointurl = http://127.0.0.1:9000
+    endpointurl = https://autophytic-selenious-julianne.ngrok-free.dev
     access_key_id = minioadmin
     secret_access_key = minioadmin

@@ -1,9 +1,7 @@
 # .github/workflows/ci.yml
 
-# ✅ نام workflow برای خوانایی بهتر اضافه شد
 name: CI Pipeline for Gas Turbine Project
 
-# ✅ تریگرهای اجرا برای push و pull_request به شاخه master اضافه شد
 on:
   push:
     branches: [ master ]
@@ -28,7 +26,6 @@ jobs:
       
       - name: Configure DVC with MinIO
         env:
-          # ✅ متغیر MINIO_ENDPOINT_URL برای خواندن از secrets اضافه شد
           MINIO_ENDPOINT_URL: ${{ secrets.MINIO_ENDPOINT_URL }}
           MINIO_ACCESS_KEY: ${{ secrets.MINIO_ACCESS_KEY }}
           MINIO_SECRET_KEY: ${{ secrets.MINIO_SECRET_KEY }}
@@ -36,6 +33,14 @@ jobs:
           dvc remote modify myremote endpointurl $MINIO_ENDPOINT_URL
           dvc remote modify myremote access_key_id $MINIO_ACCESS_KEY
           dvc remote modify myremote secret_access_key $MINIO_SECRET_KEY
+
+      # ✅ گام جدید برای عیب‌یابی اتصال
+      - name: Test MinIO Connectivity
+        env:
+          MINIO_ENDPOINT_URL: ${{ secrets.MINIO_ENDPOINT_URL }}
+        run: |
+          echo "Pinging MinIO server at $MINIO_ENDPOINT_URL"
+          curl -v $MINIO_ENDPOINT_URL/minio/health/live
 
       - name: Pull DVC data
         run: |
