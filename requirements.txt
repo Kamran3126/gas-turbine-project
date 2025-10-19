@@ -498,6 +498,7 @@ numpy==2.3.3
     #   scipy
     #   seaborn
     #   streamlit
+    #   xgboost
 nvidia-ml-py==13.580.82
     # via bentoml
 omegaconf==2.3.0
@@ -807,6 +808,7 @@ scipy==1.16.2
     # via
     #   mlflow
     #   scikit-learn
+    #   xgboost
 scmrepo==3.5.2
     # via
     #   dvc
@@ -992,6 +994,8 @@ wrapt==1.17.3
     #   opentelemetry-instrumentation-aiohttp-client
 wsproto==1.2.0
     # via httpx-ws
+xgboost==3.1.0
+    # via -r requirements.in
 yarl==1.22.0
     # via aiohttp
 zc-lockfile==4.0

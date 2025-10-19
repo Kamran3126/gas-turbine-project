@@ -3,6 +3,7 @@ pandas
 scikit-learn
 matplotlib
 seaborn
+xgboost
 jupyterlab
 
 # MLOps tools
